@@ -1,0 +1,220 @@
+<html xmlns:th="http://www.thymleaf.org" lang="en">
+    <head>
+        <title>Admin Page</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <script src ="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    </head>
+    <style type="text/css">
+            html {
+        overflow: scroll; 
+        overflow-x: hidden;
+        }
+         ::-webkit-scrollbar{
+        width: 10px; 
+        
+        } 
+       
+        ::-webkit-scrollbar-thumb {
+            background: #b13939;
+            }
+     /* body{
+        background-image: url('C:\Users\PRASANA VEVEDHA\Music\Admin-icon.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            
+    }   */
+        #main{
+    
+           border-radius: 10px;
+            display: grid;
+            margin-top:1%;
+            margin-left: 5%;
+            margin-right:5%;
+            grid-template-columns: 1fr 1fr; 
+            font-size: 1.5em;
+            color:white;
+            
+        }
+        #college-corner{
+           overflow: scroll;
+            text-align:center;
+           
+        }
+        
+        #student-details-corner{
+           overflow: scroll;
+            text-align: center;
+        }
+        #headSection{
+            text-align: center;
+            color:rgb(236, 231, 231);
+            margin-left:25%;
+            margin-right:25%;
+            border-radius: 10px;
+            font-weight:400px;
+        }
+        
+        
+        #admin-details{
+            display:grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            margin-left:10%;
+            color:white;
+        }
+
+        #sendEmail{
+             display:none;
+            background-color: white;
+            border: 2px solid red;
+            height:40vh;
+            margin-left:60%;
+            border-radius:20px;
+            color:black;
+            font-weight: bold;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+         #addNotification{
+             display:none; 
+            background-color: white;
+            border: 1px solid black; 
+            padding: 10%;
+            margin-top:10%;
+            text-align: justify;
+            margin-left:10%;
+            border-radius:10px;
+            color:black;
+            font-weight: bolder;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+       
+    </style>
+    <body background="/images/adminwindowBack.jpg" style="background-repeat: no-repeat;background-size: cover;">
+        <script type="text/javascript">
+            function openNotify(){
+                var addnotify=  document.getElementById('addNotification')
+                if(addnotify.style.display="none"){
+                    addnotify.style.display="block";
+                    document.getElementById('inside-student').style.display="none"
+                }
+            }
+            function closeNotify(){
+                var addnotify=  document.getElementById('addNotification')
+                if(addnotify.style.display="block"){
+                    addnotify.style.display="none";
+                    document.getElementById('inside-student').style.display="inline"
+                }
+            }
+        </script>
+        <header>
+            <h4 id="headSection" class="display-6">Welcome Admin<a th:href=@{/home} method="get"><img th:src="@{/images/homeButton.png}"style="width:15%;height:15%;margin-left: 10%;"></a></h4>
+            </header>
+       <div id="admin-details">
+            <span> <img src="/images/Admin-icon.png" height="120px"></span>
+            <span>Depot No <h4 th:text="${admin.depotnumber}">  </h4></span>
+            <span>Depot Name <h4 th:text="${admin.depotname}">  </h4></span>
+            <span><button class="btn btn-primary" onclick="openNotify()">Click to add Notification</button><br>
+                <br>
+            <form th:action=@{/admin/tries/to-logout} method="post">
+            <button class="btn btn-primary">logout</button>
+            </form></span> 
+           
+       </div>
+        <div id="main">
+            <div id="college-corner" >
+                <h4 class="display-6" >College Works Are Here </h4>
+                <span id="insideCollege">
+                 <h5>Colleges</h5>
+                <form th:action=@{/admin/get-details/college} method="get">
+                 <select name="collegename" class="form-control" style="width:70%; margin:2% 10%;" readonly>
+                 <option  th:each="clgadmin:${collegeadmin}" th:text="${clgadmin.collegename}" th:value="${clgadmin.collegename}"></option>
+                 </select>
+              <button type="submit" class="btn btn-primary">View Details</button>
+              </form>
+              <h5>Colleges Submitted Form</h5>
+                <form th:action=@{/admin/get-details-of/college-submitted} method="get" >
+               <select name="collegesubmitted" class="form-control" style="width:70%; margin:2% 10%;" readonly>
+                 <option th:each="collegetoverify :${collegestoverify}" th:text="${collegetoverify.collegename}" th:value="${collegetoverify.collegename}"></option>
+                 </select>
+                <button class="btn btn-primary" type="submit">Verify</button>
+                </form>
+                 <h5>Colleges To be Approved</h5>
+                <form th:action=@{/admin/get-details-of/college-registered} method="get" >
+               <select name="collegesubmitted" class="form-control" style="width:70%; margin:2% 10%;" readonly>
+                 <option th:each="collegetoapprove :${collegestoapprove}" th:text="${collegetoapprove.collegename}" th:value="${collegetoapprove.collegename}"></option>
+                 </select>
+                <button class="btn btn-primary" type="submit">Verify</button>
+                </form>
+                <h5>College Links to be disabled </h5>
+                <form th:action=@{/admin/disable/college/submission-of-forms} method="get" >
+               <select name="collegesubmitted" class="form-control" style="width:70%; margin:2% 10%;" readonly>
+                 <option th:each="collegetodisable :${collegestobedisabled}" th:text="${collegetodisable.collegename}" th:value="${collegetodisable.collegename}"></option>
+                 </select>
+                <button class="btn btn-primary" type="submit">Verify</button>
+                </form> 
+                </span>
+            </div>
+
+            <div id="student-details-corner" >
+                <div id="inside-student">
+                    <h4 class="display-6" >Bus Pass Works Are Here </h4>
+                <span id="insideStudent">
+                <h5>Bus Pass Students Details to be Verified</h5>
+                <form th:action=@{/admin/getStudent/By-college-name} method="post" >
+               <select name="college_students" class="form-control" style="width:70%; margin:2% 10%;" readonly>
+                 <option th:each="collegetoverify :${collegestoverify}" th:text="${collegetoverify.collegename}" th:value="${collegetoverify.collegename}"></option>
+                 </select>
+                <button class="btn btn-primary" type="submit">Verify</button>
+                </form>
+                <h5>Colleges not submitted Bus Pass Students Details to be Verified</h5>
+                <form th:action=@{/admin/get-college/not-submitted/details-of/students} method="get" >
+               <select name="collegesubmitted" class="form-control" style="width:70%; margin:2% 10%;" readonly>
+                 <option th:each="collegetoverify :${collegestoverify}" th:text="${collegetoverify.collegename}" th:value="${collegetoverify.collegename}"></option>
+                 </select>
+                <button class="btn btn-primary" type="submit">Verify</button>
+                </form>
+                <h5>Verified Colleges </h5>
+                <div>College Name Button</div><br>
+                 <h5>Verified Colleges </h5>
+                 <form th:action=@{/admin/send-college/verfied/message} method="get" >
+               <select name="collegesubmitted" class="form-control" style="width:70%; margin:2% 10%;" readonly>
+                 <option th:each="collegeverified :${collegesverified}" th:text="${collegeverified.collegename}" th:value="${collegeverified.collegename}"></option>
+                 </select>
+                <button class="btn btn-primary" type="submit">Verify</button>
+                </form>
+                </span>
+                </div>
+                
+                <div id="addNotification" >
+                   
+                  <span id="heading" style="background-color:rgb(70, 37, 37); color:white; margin-left:10%">Add Notification</span><br>
+                  <div style="margin-left:8%">
+                        <textarea type="form-control"></textarea>
+                        <br>
+                        <br>
+                      <button class="btn-primary">Add</button> <br><br><button class="btn-danger" onclick="closeNotify()">Cancel</button>
+                  </div>
+                </div>
+            </div>
+
+
+            
+        </div>
+        <div id="sendEmail">
+            <button style="margin-left: 90%;margin-top:2%;" class="btn-danger">X</button>
+          <span id="heading" style="background-color:rgb(70, 37, 37); color:white; margin-left:10%;">Send Email</span><br>
+          <div style="margin-left:8%">
+          From:<label>MTCAdmin12@gmail.com</label><br>
+          To:<label>Mcc123@gmail.com</label><br>
+          Body <br>
+          Message:<textarea type="text" ></textarea><br>
+          <button class="btn-primary">send</button>
+          </div>
+        </div>
+        
+        
+
+    </body>
+</html>

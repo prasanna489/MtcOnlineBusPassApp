@@ -1,0 +1,147 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+<title>College Admin Page</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <script src ="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<style type="text/css">
+	html {
+overflow: scroll; 
+overflow-x: hidden;
+}
+ ::-webkit-scrollbar{
+width: 10px; 
+
+} 
+
+::-webkit-scrollbar-thumb {
+	background: #b13939;
+	}
+	body{
+            background-repeat: no-repeat;
+            background-size: cover;        
+	}
+
+
+#headSection{
+	text-align: center;
+	color:black;
+	background-color: white;
+	margin-left:25%;
+	margin-right:25%;
+	border-radius: 10px;
+	font-weight:400px;
+	opacity:0.8;
+	padding: 1% ;
+}
+
+
+#admin-details{
+	display:grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	margin-left:5%;
+	color:black;
+	font-weight: bold;
+	font-size:x-large;
+}
+#center{
+	background-color:none;
+	margin-left: 10%;
+	margin-right: 10%;
+	padding: 3% 3%;
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+grid-template-rows:  1fr 1fr 1fr;	
+	
+}
+#center span{
+	padding: 5%;
+	margin: 2% 2% 2% 2%;
+	border-radius: 10px;
+	text-align: center;
+	opacity: 0.9;
+}
+#center span:hover{
+	opacity: 1;
+	margin: 0% 0% 0% 0%;
+	font-size: 100%;
+}
+
+ #addNotification{
+	 display:none; 
+	background-color: white;
+	border: 1px solid black; 
+	padding: 10%;
+	margin-top:10%;
+	text-align: justify;
+	margin-left:10%;
+	border-radius:10px;
+	color:black;
+	font-weight: bolder;
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+</style>
+<body background="/images/CollegeBackimg.jpg">
+<script type=" text/javascript">
+	 setTimeout(function () { 
+  
+            // Closing the alert 
+            $('#alert').alert('close'); 
+        }, 5000); 
+
+</script>
+<div id="headSection">	<h4  class="display-6">Welcome College Admin </h4><a th:href="@{/home}"><img src="http://www.clker.com/cliparts/E/y/s/j/w/U/home-icon-hi.png" style="width:15%;height:15%;margin-left: 10%;"></a> </div>
+	
+	<div th:if="${fail}" id="alert" class="alert alert-success" style="width:50%"> 
+       College Final submission  
+       Success
+    </div> 
+	<div id="admin-details">
+		<span> <img src="https://icons.iconarchive.com/icons/aha-soft/free-large-boss/256/Admin-icon.png" height="120px"></span>
+		<span>College Id <h4 th:text="${college.collegeid}">  </h4></span>
+		<span>College Name <h4 th:text="${college.collegename}">  </h4></span>
+		<span>Telephone number <h4 th:text="${college.collegetelephone}">  </h4></span>
+		<span><form th:action=@{/college/admin/action-logout} method="post">
+				<button type="submit" class="btn btn-primary">Logout</button>
+			</form>
+		</span> 
+	   
+   </div>
+			
+			
+			<div id="Center-Main">
+				<div id="center">
+					<span style="background-color: teal;"><h3> Depot name  </h3><br><h5 th:text="${college.collegedepot}"></h5></span>
+					<span style="background-color: thistle;"><h3>Approved Date</h3><br><h5 th:text="${college.approvedate}"></h5></span>
+					<span style="background-color: turquoise;"><h3>Final submission Date</h3><br><h5 th:text="${college.collegedepot}"></h5> </span>
+				<span style="background-color: violet;" >
+					<h3>Students Submitted</h3><br><h5 th:text="${studtotal}"></h5></span>
+				<span style="background-color: burlywood;"><center><h3>Submit college forms finally</h3></center><br>
+					<form th:action="@{'/college/admin/submit/forms/'+${college.collegename}}" method="post">
+						<button type="submit" style="background-color:burlywood; border-radius: 10px; box-shadow:burlywood">Click to submit </button>
+					</form></span>
+					<span style="background-color: rgb(89, 89, 173);"><form th:action="@{'/college/admin/search/department/'+${college.collegename}}" method="post">
+						<h3>Search Students By Department</h3>
+						<button type="submit" style="background-color:rgb(89, 89, 173);font-size: x-large; border-radius: 10px; box-shadow:rgb(89, 89, 173);">Click Here</button>
+					</form></span>
+					<span style="background-color: rgb(89, 89, 173);"><form th:action=@{/college/admin/action-logout} method="post">
+						<h3>Status Of Verification</h3>
+						<button type="submit" style="background-color:rgb(89, 89, 173);font-size: x-large; border-radius: 10px; box-shadow:rgb(89, 89, 173);">Click to Know</button>
+					</form></span>
+					
+					<span style="background-color: blueviolet;">
+						<h3>Form Submission link</h3>
+						<a th:href="${college.link}" class="btn btn-primary">College Link</a>
+					</span>
+				</div>
+			</div>
+</body>
+</html>

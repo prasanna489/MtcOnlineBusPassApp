@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="Kodinger">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>College Login Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src ="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<style>
+body{
+	background-image: url('https://i.pinimg.com/originals/1c/cd/02/1ccd02cfe8b968848bc6e6bb5fe94d35.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+    #invalid-feedbackname,#invalid-feedbackid,#invalid-feedbackpassword{
+        display: none;
+        color:red;
+        font-size: large;
+    }
+	#feedback{
+        color:red;
+        font-size: large;
+    }
+    .card-body{
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+		
+    }
+	
+</style>
+
+<body>
+    <script type="text/javascript">
+    function verify(){
+        var name=document.getElementById('name').value
+        var id=document.getElementById('id').value
+        var password=document.getElementById('password').value
+        if(name.length<5){
+            document.getElementById('invalid-feedbackname').style.display="inline"
+        }
+        if(id=" "){
+            document.getElementById('invalid-feedbackid').style.display="inline"
+        }
+        if(password==" "){
+            document.getElementById('invalid-feedbackpassword').style.display="inline"
+        }
+      }
+    </script>
+	<section class="h-100">
+		<div class="container h-100">
+			<div class="row justify-content-md-center h-100">
+				<div class="card-wrapper">
+                    <div>
+                    <h4 class="card-title" style="margin-left: 35%; margin-top: 5%;color: white;">Student Bus Pass Application</h4>
+                    </div>
+					<div class="card fat" style="margin: 0% 10% 10% 10%;">
+						<div class="card-body">
+                            <div id="entercolumn">
+							<h4 class="card-title">Login As College Admin</h4>
+							<form method="POST" class="my-login-validation" th:action=@{/college/login/login-as/college/verify}>
+								<div class="form-group" style="width:50%">
+									<label for="email">Enter College  User Name</label>
+									<input id="name" type="email" class="form-control" name="collegename"  required autofocus>
+									<div id="invalid-feedbackname">
+										* College name is invalid
+									</div>
+								</div>
+
+                                <div class="form-group" style="width:50%">
+									<label for="email">Enter College Id</label>
+									<input id="id" type="text" class="form-control" name="collegetelephone" required autofocus>
+									<div id="invalid-feedbackid">
+									    * College Id is Invalid
+									</div>
+								</div>
+
+								<div class="form-group" style="width:70%">
+									<label for="password">Password
+										<a href="forgot.html" class="float-right">
+											Forgot Password?
+										</a>
+									</label>
+									<input id="password" type="password" class="form-control" name="password" required data-eye>
+								    <div id="invalid-feedbackpassword">
+								    	Password is required
+							    	</div>
+								</div>
+
+								<div class="form-group">
+									<div class="custom-checkbox custom-control">
+										<input type="checkbox" name="remember" id="remember" class="custom-control-input">
+										<label for="remember" class="custom-control-label">Remember Me</label>
+									</div>
+								</div>
+
+								<div class="form-group m-0">
+									<button type="submit" class="btn btn-primary btn-block" onclick="verify()">
+										Login
+									</button>
+								</div>
+								<div th:if="${faillogin}" id="feedback">
+										* Password and username doesnt match
+								</div>
+								 <div class="mt-4 text-center">
+									Not Registered? <a href="register.html">Create One</a>
+								</div> 
+							</form>
+                            </div>
+                             <div class="brand">
+                                <img src="https://www.svgrepo.com/show/49180/school.svg" alt="logo" style="width:90%; height:90%">
+                            </div> 
+						</div>
+					</div>
+					<div class="footer" style="margin-left: 30%;color: white;">
+						Copyright &copy; 2021 &mdash; Bus Pass Application 
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+
+	
+</body>
+</html>

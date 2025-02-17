@@ -1,0 +1,102 @@
+<html xmlns:th="http://www.thymleaf.org">
+    <head>
+        <title>Home</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <script src ="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    </head>
+    <style type="text/css">
+    body{
+        background-image: url("/images/homeBack.jpeg"); 
+            background-repeat: no-repeat;
+            background-size:cover;
+    }
+    #main{
+        background-color: white;
+        border-radius: 10px;
+        opacity:0.8;
+        height:420px;
+        margin-top:8%;
+        margin-left:2%;
+        margin-right:2%;
+        display:grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+    .display-5{
+        color:black;
+        font-weight: normal;
+        text-align: center;
+    }
+    .display-3{
+        font-weight:normal;
+        color:black;
+        text-align: center;
+        background-color:white;
+        opacity:0.8;
+        margin-top: 2%;
+        margin-left:10%;
+        margin-right:10%;
+        border-radius: 10px;
+        padding-bottom: 1%;
+    }
+
+    
+
+
+    </style>
+    
+    <body>
+        <header style="margin-bottom:5%;">
+            <h1 id="headSection" class="display-3" style="background-color: rgb(255, 245, 245);">Metropolitan Transport Corporation</h1>
+       </header>
+         
+        <div id="main" style="border-top:1px solid black" >
+            <div id="MTCAdmin">
+                <h4 class="display-5" style="border-bottom: 1px solid black;">MTC Admin</h4>
+               
+                <table id="mtcadmintable" class="table-borderless" style="font-size:x-large; text-align: center; color:black;">
+                    <tr><td>Login As Mtc Admin</td>
+                    <tr><td><img th:src="@{/images/Admin-icon.png}" height="150px"></td></tr>
+                    <td><center><a href="/todepot/admin/login-page" class="form-control" target="_blank" style="color: blue; font-size: bold;">Click Login</a></center></td></tr>
+                </table>
+            </div>
+            <div id="CollegeAdmin">
+                <h4 class="display-5" style="border-bottom: 1px solid black;" >College Admin</h4>
+                <table id="collegeadmintable" class="table-borderless" style="font-size:x-large;  color:black">
+                    <tr><td style="font-size: 0.8em; font-weight: bold;"><center>Login As College Admin</center></td></tr>
+                    <tr><td colspan="2"><img th:src="@{/images/collegeicon.svg}" width="250px"; height="200px;"></td></tr>
+                    <tr><td><a href="/college/login/login-as/college"  class="form-control" target="_blank" style="color: blue; font-size: bold;">Click Login</a><br></td></tr>
+                    <tr><td><a href="/register/college/year2021" class="form-control" target="_blank" style="color: blue; font-size: bold;">Register</a></td></tr>
+                </table>
+            </div>
+            <div id="Students">
+                <h4 class="display-5" style="border-bottom: 1px solid black;">Students</h4>
+                <table id="studenttable" class="table-borderless" style="font-size:x-large;  color:black">
+                    <tr><td><center>Student</center> </td>
+                    <!-- <td><a href="tocollege/student/template" class="form-control" target="_blank">Click Here</a></td></tr> -->
+
+                    <tr><td colspan="2"><img th:src="@{/images/studenticon.png}" width="250px"; height="200px;"></td></tr>
+                    <tr><td><center><a href="/student/login/download/Id-Card" method="get" class="link" style="font-size: 80%;">Download Id Card</a></center> </td></tr>
+                    <tr><td><center><a href="/student/do-action/renew/verify" class="link" style="font-size: 80%;">Renew Pass</a></center> </td></tr>
+                </table>
+            </div>
+            <diV id="notification" style="margin-left: 5%;">
+                <h4 class="display-5" style="border-bottom: 1px solid black;">Notifications</h4>
+                <marquee scrollamount="5" direction="down" height="330px">
+                   <h3>Notification 4</h3>
+                   <br>
+                   <br>
+                   <h3>Notification 3</h3>
+                   <br>
+                   <br>
+                   <h3>Notification 2</h3>
+                   <br>
+                   <br>
+                   <h3>Notification 1</h3>
+                </marquee>
+            </diV>
+        </div>
+    </body>
+</html>

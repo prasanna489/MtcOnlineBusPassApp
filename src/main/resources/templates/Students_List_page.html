@@ -1,0 +1,113 @@
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<script src ="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+</head>
+<style>
+ #pages{
+   color:rgb(3, 3, 31);
+   font-size: 1.5em; 
+   width:40%;
+ } 
+ #pagesmain div{
+   display:inline;
+   background-color: white;
+   border-radius: 10px;
+   margin:2% 2% 2% 2%;
+   padding: 2% 2%;
+   width:20%;
+   height:10%;
+ }
+ /* #pagesdiv{
+   background-color: white;
+ } */
+ body{
+   color: white;
+   background-image: url("https://images.unsplash.com/photo-1486673748761-a8d18475c757?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NHx8cm9hZHxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80");
+    background-repeat: no-repeat;
+    background-size: cover;
+ }
+</style>
+ 
+
+
+<body>
+       <h2 align="center">APPLICATIONS FOR BUS PASS<a th:href=@{/home} method="get"><img src="https://icons.iconarchive.com/icons/aha-soft/free-large-boss/256/Admin-icon.png" style="width:5%;height:10%;margin-left: 3%;"></a> </h2>
+      <!--margin-left: 350px; margin-top: 50px;  --> 
+      
+     <div style="margin-left: 10%;font-size: 1.5em;display: grid;grid-template-columns: 1fr 1fr 1fr 1fr;" >
+     <label>College</label> <h4 th:text="${collegename}" style="margin-left: 5%;"></h4>
+     <label> Total Students </label><h4 th:text="${total_students}" style="margin-left: 5%;"></h4>
+     <label> Students Verified</label><h2 style="margin-left: 5%;"></h2>
+     </div>
+      <table class="table" border="2"  style=" text-align:center; font-size: 1.5em;">
+       <thead>
+       <tr>
+          <th>Application Number</th><th>Name & Address</th><th>Proof Documents</th><th>Photo</th><th>Renew Amount</th><th>Status</th>
+       </tr>
+       </thead>
+       <tbody>
+       <tr th:each="student:${students}">
+       <td th:text="${student.applicationno}"></td>
+       <td><h3 th:text="${student.firstname}"></h3>
+       <h3 th:text="${student.address}"></h3></td>
+       <td><a th:href="@{'/admin/show/proof/student-Id/'+${student.applicationno}}" target="_self">Id Card Proof</a><br>
+      		<a th:href="@{'/admin/show/proof/student-address/'+${student.applicationno}}" target="_self">Address Proof</a><br>
+      		<span th:if="${student.isAddressproofother}">
+      		<a th:href="@{'/admin/show/proof/student-Otheraddress/'+${student.applicationno}}" target="_self">Address proof of other</a>
+      		</span>
+       </td>
+       
+       <td><img th:src="@{${student.getStdImg}}" style="width:100px" id="studentphoto"></td>
+       <td style="width:20%">
+       <form th:action="@{'/admin/action/student/set-payment/'+${student.applicationno}+'/'+${student.college}+'/'+${currentPage}}">
+       <input type="text" class="form-input" name="mothlypay" th:value="${student.monthlypayment}" style="width:40%">
+       <button type="submit"  class="btn btn-primary">set amount</button>
+       </form>
+       </td>
+      <td th:if="${student.isApproved}"><a id="appr" th:href="@{'/setapprove/'+${currentPage}+'/'+${student.registernumber}}+'/'+${'true'}" class="btn btn-success"  rel="noopener noreferrer">Approved</a>
+        <a id="deny" th:href="@{'/setapprove/'+${currentPage}+'/'+${student.registernumber}}+'/'+${'false'}" class="btn btn-danger"  rel="noopener noreferrer">To DisApprove</a></td>
+        <td th:unless="${student.isApproved}">
+        <a id="appr" th:href="@{'/setapprove/'+${currentPage}+'/'+${student.registernumber}}+'/'+${'true'}" class="btn btn-primary"  rel="noopener noreferrer">To Approve</a>
+        <a id="deny" th:href="@{'/setapprove/'+${currentPage}+'/'+${student.registernumber}}+'/'+${'false'}" class="btn btn-danger"  rel="noopener noreferrer">DisApproved</a></td>
+      
+       </tbody>
+       </table>
+       
+       
+       
+      <div id="pages">    
+       <div th:if = "${totalPages > 1}">
+       <div  id="pagesmain">
+         Total
+       <div  id="col-sm-1">
+         [[${totalItems}]]
+       </div>
+       <div  >
+       <span th:each="i:${#numbers.sequence(1,totalPages)}">
+       <a th:if="${currentPage != i}" th:href="@{'/page/'+${college}+'/'+${i}}">[[${i}]]</a>
+       <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
+       </span>
+       </div>
+       <div >
+        <a th:if="${currentPage < totalPages}" th:href="@{'/page/'+${college}+'/'+${currentPage + 1 }}">[[${i}]]</a>
+       <span th:unless="${currentPage < totalPages}">Next</span>
+       </div>
+       <div >
+       <a th:if="${currentPage < totalPages}" th:href="@{'/page/'+${college}+'/'+${totalPages}}">[[${i}]]</a>
+       <span th:unless="${currentPage < totalPages}">Last</span>
+       </div>
+       </div>
+        </div>
+       </div>
+       
+
+</body>
+</html>
+

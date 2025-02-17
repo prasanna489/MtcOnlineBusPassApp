@@ -1,0 +1,310 @@
+<html xmlns:th="http://www.thymleaf.org">
+    <head>
+        <title>Application Form</title>
+         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<script src ="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+     </head>
+
+     <style type="text/css">
+
+      html {
+        overflow: scroll;
+        overflow-x: hidden;
+        }
+         ::-webkit-scrollbar{
+        width: 10px; 
+        
+        } 
+       
+        ::-webkit-scrollbar-thumb {
+            background: #ada7a7;
+            }
+	 body{
+	   background-color:#e9e1e1;
+	 }
+	 button{
+	     
+		 width:180px;
+		 height:40px;
+	 }
+    
+     #Main{
+         margin-top:2%;
+        display:grid;
+          grid-template-columns: 6fr 2fr ;
+     }
+         form{
+             margin-left:8%;
+             margin-right:5%;
+			 font-size:1.5em;
+             }
+        
+		 #singleStop{
+		   display:none;
+		 }
+		  #midStop{
+		   display:none;
+		 }
+         
+		 #selest{
+		   text-align:center;
+		   color:red;
+		 }
+		 #headSection {
+       color:rgb(80, 80, 184);  
+       margin-left:13%;
+     }
+    
+		 
+		 
+		 
+    </style>
+    <body>
+        <header>
+           <!-- <span id="headSection">Metropolitan Transport Corporation</span><br> -->
+            <h1 id="headSection" class="display-3">Metropolitan Transport Corporation</h1>
+          </header>
+          <span id="insideHeading" style="margin-left: 25%;margin-right: 25%; font-size: 1em; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;"> Online Students Concession Bus Pass Application Academic year-2021</span> 
+    
+       
+       <div id="Main">
+        <div id="gridMain">
+<form method="post" th:action=@{/success/student/form-submission} th:object="${Students}" encType="multipart/form-data">
+<table class="table table-borderless">
+    <tr>    
+    <input th:value="${clgadmin.collegename}" type="text" class="form-control" name="college" readonly>
+    </tr>
+    <tr>
+        <td><label for="inputEmail3" class="col-sm-16 col-form-label" >First Name</label></td>
+       <td> <input type="text" class="form-control" id="firstname" name="firstname" ></td>
+       <td><label for="inputEmail3" class="col-sm-16 col-form-label">Last Name</label></td>
+       <td><input type="text" class="form-control" id="lastname" name="lastname"></td>
+    </tr>
+    <tr>
+      <td><label for="inputEmail3" class="col-sm-16 col-form-label">Email</label></td>
+      <td><input type="email" class="form-control" id="email" name="email"></td>
+      <td><label for="inputEmail3" class="col-sm-16 col-form-label" >Gender</label></td>
+       <td> <select class="form-control selectpicker" name="gender" id="gender">
+      <option value="">--Choose--</option>
+      <option value="MALE">MALE</option>
+      <option value="FEMALE">FEMALE</option>
+      <option value="TRANDGENDER">TRANSGENDER</option>
+      </select></td>
+  </tr>
+    <tr>
+        <td><label for="inputPassword3" class="col-sm-16 col-form-label">College Register Number</label></td>
+        <td><input type="text" class="form-control" id="registreno" name="registernumber"></td>
+        <td><small>Application No for I years </small><td>
+        </tr>
+        <tr>
+        <td><label for="inputPassword3" class="col-sm-16 col-form-label">Department</label></td>
+        <td><input type="text" class="form-control" id="department" name="department"></td>
+    </tr>
+    <tr>
+        <td><label for="inputPassword3" class="col-sm-16 col-form-label">Graduation Type</label></td>
+        <td><select class="form-control selectpicker" name="graduationtype" id="graduation">
+            <option value="">--Choose--</option>
+            <option value="UG">Under Graduate</option>
+            <option value="PG">Post Graduate</option>
+            <option value="Diploma">Diploma</option>
+            </select></td>
+        <td><label for="inputPassword3" class="col-sm-16 col-form-label">Year Of Study</label></td>
+        <td><input type="text" class="form-control" id="yearofstudy" name="yearofstudy" placeholder="1ST"></td>
+    </tr>
+    <tr>
+        <td><label for="inputPassword3" class="col-sm-16 col-form-label">Date of Birth</label></td>
+        <td><input type="date" class="form-control" id="dob" name="dob"></td>
+        <td><label for="inputPassword3" class="col-sm-16 col-form-label">Age</label></td>
+        <td><input type="text" class="form-control" id="age" name="age"></td>
+    </tr>
+   
+    <tr>
+        <td><label for="inputPassword3" class="col-sm-16 col-form-label">Address</label></td>
+        <td><textarea rows = "5" cols = "30"  class="form-control" name="address"></textarea></td>
+        <td><label for="inputPassword3" class="col-sm-16 col-form-label" >Pin Code</label></td>
+        <td><input type="text" class="form-control" id="pincode" name="pincode"></td>
+    </tr>
+    <tr>
+        <td><label for="inputPassword3" class="col-sm-16 col-form-label">Phone Number</label></td>
+        <td><input type="text" class="form-control" id="phoneno" name="phonenumber"></td>
+    </tr>
+    <tr>
+        <td><label for="exampleFormControlFile1">Upload Image</label></td>
+        <td><input type="file" class="form-control-file" name="fileImage" id="fileImage" accept="image/png , image/jpeg" ></td>
+    </tr>
+    <tr>
+        <td><label for="exampleFormControlFile1">Upload Documents</label></td>
+    </tr>
+    <tr>  
+        <td><label for="exampleFormControlFile1"> (1) College Identity Card / Bonafide</label></td>
+        <td><input type="file" class="form-control-file" name="clgidfile" id="clgid" required />
+        <small><br><br>ID card mandatory for 2nd & 3rd yrs.<br>Freshers can submit Bonafide </small><td>
+    </tr>
+    <tr>
+        <td><input id="studentAddress" value="student" class="form-check-input" type="radio" name="addressProof" onclick="checking('student')">Your Address Proof</td>
+    </tr>  
+    <tr>  
+        <td><input id="othersAddress" value="true" class="form-check-input" type="radio" name="addressProofother" onclick="checking('others')" >Other's Address Proof</td>
+        <td><small>Other's are Relation , House Owner , PG Hostel Ownner <br>with college seal </small><td>
+    </tr>
+    <tr>  
+        
+        <td><label for="exampleFormControlFile1">(2a) Your Address Proof</label></td>
+        <td><input type="file" class="form-control-file" name="addressproof1" id="addressproof1" required /></td>
+    </tr>
+    
+    <tr>
+        <td><label for="exampleFormControlFile1">(2b) Other's Address Proof </label></td>
+        <td><input type="file" class="form-control-file" id="gaurdaddress" name="addressproofother"  disabled /></td>
+		
+    <tr>
+        <td colspan="3">
+            <label for="inputPassword3" class="col-sm-16 col-form-label">Select Stopping</label></td>
+        
+    </tr>
+    <tr>
+        <td>
+            <label for="inputPassword3" class="col-sm-16 col-form-label">From College</label></td>
+            <td><select class="form-control selectpicker" name="fromcollege" id="fromcollege">
+                <option value="">--Choose--</option>
+                <option th:text="${clgadmin.stop1}" th:value="${clgadmin.stop1}" ></option>
+                <option th:text="${clgadmin.stop2}" th:value="${clgadmin.stop2}" ></option>
+                </select>
+        </td>
+    </tr>
+    <tr>
+        <td> <label for="inputPassword3" class="col-sm-16 col-form-label">Choose Your Routes</label></td>
+        <td>
+            <select id="singMidChoose" class="form-control selectpicker" onclick='singmid()' name="typeofroute">
+                <option value="">--Choose--</option>
+                <option value="Single-Route">Single-Route</option>
+                <option value="Mid-Stopping-Route">Mid-Stopping-Route</option>
+                </select>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+
+            <div id="singleStop">
+                <label for="inputPassword3" class="col-sm-16 col-form-label">To Home</label>
+            <select class="form-control selectpicker" name="tohome" id="tohome">
+                <option value="">--Choose--</option>
+                <option value="Single-Route">Single</option>
+                <option value="Mid-Stopping-Route">Single</option>
+                </select>
+            </div>
+            <div id="midStop">
+                 <label for="inputPassword3" class="col-sm-16 col-form-label">To Mid Stop</label>
+                <select class="form-control selectpicker" name="tomid" id="tomid">
+                    <option value="">--Choose--</option>
+                    <option value="Single-Route">mid</option>
+                    <option value="Mid-Stopping-Route">mid</option>
+                    </select><br>
+                    <label for="inputPassword3" class="col-sm-16 col-form-label">To Home</label>
+                <select class="form-control selectpicker" name="tohome" id="tomidtohome">
+                    <option value="">--Choose--</option>
+                    <option value="Single-Route">multi</option>
+                    <option value="Mid-Stopping-Route">multi</option>
+                 </select>
+            </div>
+        </td>
+    </tr>
+    
+  </table>
+  
+
+  <!--modal box for Submission-->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+         Next Step is to Pay Amount 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ReCheck</button>
+        
+          <button type="submit" class="btn btn-primary">Proceed To pay</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+    <!-- Button trigger modal-->
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    SUBMIT
+  </button>
+</form>
+</div>
+<div id="gridphoto"> <img
+src="https://tnpds.gov.in/javax.faces.resource/dynamiccontent.properties.xhtml?ln=primefaces&pfdrid=hhCW%2Fkc%2BcssGtFer7vPCaTAYf7p6Gy9r4yO%2FA8IyJcW%2FyDEARwEyDNzXe9wtrjku&null=Wed+Feb+10+16%3A19%3A01+IST+2021&pfdrid_c=false"
+ id="thumbnail" name="fileImage" alt="Photo Preview" class="img-thumbnail" style="width: 150px; height: 150px;"></div>       
+</div>
+
+
+ <script type="text/javascript">
+           
+           function checking(checked){
+               if(checked=="student"){
+                document.getElementById('othersAddress').checked=false;
+                document.getElementById('gaurdaddress').setAttribute('disabled','true');
+               }
+               else if(checked=="others"){
+               // document.getElementById('gaurdaddress').style.display="inline";
+                   document.getElementById('studentAddress').checked=false;
+                   document.getElementById('gaurdaddress').removeAttribute('disabled');
+                   document.getElementById('gaurdaddress').removeAttribute('value');
+               }
+           }
+    
+           function singmid(){
+             var singleselect=document.getElementById('singleStop');
+             var midselect=document.getElementById('midStop');
+              var selected=document.getElementById('singMidChoose').value;
+                        if(selected==""){
+                           singleselect.style.display="none";
+                           midselect.style.display="none";
+                        }
+                       else if(selected=="Single-Route"){
+                           singleselect.style.display="inline";
+                           midselect.style.display="none";
+                           }
+                           else if(selected=="Mid-Stopping-Route"){
+                             midselect.style.display="inline";
+                             singleselect.style.display="none";
+                           }
+                           
+                                 
+           }
+
+$(document).ready(function() {
+   $('#fileImage').change(function(){
+    showImageThumbnail(this);
+ });
+
+});
+
+
+
+
+function showImageThumbnail(fileInput){
+      file=fileInput.files[0];
+	  reader=new FileReader();
+      reader.onload=function(e){
+        $('#thumbnail').attr('src',e.target.result);
+      
+      };
+      reader.readAsDataURL(file);
+}
+         
+        
+</script>
+    </body>
+    </html>
